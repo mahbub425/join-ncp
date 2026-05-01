@@ -1,0 +1,12 @@
+{
+  "name": "NCP Bhurungamari - Member Portal",
+  "description": "জাতীয় নাগরিক পার্টি (এনসিপি), ভূরুঙ্গামারী উপজেলা শাখার পাবলিক ওয়েবসাইট, সদস্য সংগ্রহ ফর্ম ও অ্যাডমিন প্যানেল।",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "Firebase Firestore",
+    "Firebase Auth",
+    "PDF Generation",
+    "Word Export",
+    "Dynamic Form Builder"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "projects": {
+    "default": "ncp-membership-system"
+  },
+  "targets": {
+    "ncp-membership-system": {
+      "hosting": {
+        "join-ncp": [
+          "join-ncp"
+        ],
+        "ncp-membership-system": [
+          "ncp-membership-system"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

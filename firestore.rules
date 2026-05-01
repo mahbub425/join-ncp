@@ -1,0 +1,65 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Default Deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    // Submission Validation
+    function isValidSubmission(data) {
+      return data.keys().hasAll(['formNo', 'personal', 'contact', 'status', 'submittedAt']) &&
+             data.formNo is string &&
+             data.personal.name is string && data.personal.name.size() >= 2 &&
+             data.contact.mobile is string &&
+             data.status in ['New', 'Reviewed', 'Approved', 'Rejected'];
+    }
+
+    // Admin Collection
+    match /admins/{adminId} {
+      allow read: if isSignedIn() && request.auth.uid == adminId;
+    }
+
+    // Submissions
+    match /submissions/{submissionId} {
+      allow create: if isValidId(submissionId) && isValidSubmission(incoming()) && incoming().status == 'New';
+      allow list, get: if isAdmin();
+      allow update: if isAdmin() && (incoming().diff(resource.data).affectedKeys().hasAny(['status', 'reviewedAt', 'reviewedBy']));
+      allow delete: if isAdmin();
+    }
+
+    // Settings & CMS
+    match /settings/{settingId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /formFields/{fieldId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    
+    // Legacy tests
+    match /test/connection {
+      allow read: if true;
+    }
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "entities": {
+    "Submission": {
+      "title": "Member Submission",
+      "description": "Details of a person applying for NCP membership",
+      "type": "object",
+      "properties": {
+        "formNo": { "type": "string", "description": "Unique form number" },
+        "personal": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "nid": { "type": "string" },
+            "fatherName": { "type": "string" },
+            "motherName": { "type": "string" },
+            "dob": { "type": "string", "format": "date" },
+            "bloodGroup": { "type": "string" },
+            "gender": { "type": "string" },
+            "photoUrl": { "type": "string" }
+          },
+          "required": ["name", "nid", "fatherName", "motherName", "dob"]
+        },
+        "education": {
+          "type": "object",
+          "properties": {
+            "qualification": { "type": "string" },
+            "institute": { "type": "string" }
+          }
+        },
+        "presentAddress": {
+          "type": "object",
+          "properties": {
+            "village": { "type": "string" },
+            "union": { "type": "string" },
+            "post": { "type": "string" },
+            "thana": { "type": "string" },
+            "upazila": { "type": "string" },
+            "district": { "type": "string" }
+          }
+        },
+        "permanentAddress": {
+          "type": "object",
+          "properties": {
+            "village": { "type": "string" },
+            "union": { "type": "string" },
+            "post": { "type": "string" },
+            "thana": { "type": "string" },
+            "upazila": { "type": "string" },
+            "district": { "type": "string" }
+          }
+        },
+        "profession": {
+          "type": "object",
+          "properties": {
+            "occupation": { "type": "string" },
+            "workplace": { "type": "string" }
+          }
+        },
+        "contact": {
+          "type": "object",
+          "properties": {
+            "mobile": { "type": "string" },
+            "email": { "type": "string" },
+            "facebook": { "type": "string" }
+          },
+          "required": ["mobile"]
+        },
+        "experience": {
+          "type": "object",
+          "properties": {
+            "politicalAffiliation": { "type": "boolean" },
+            "orgExperience": { "type": "boolean" }
+          }
+        },
+        "intent": {
+          "type": "object",
+          "properties": {
+            "workArea": { "type": "string" },
+            "contribution": { "type": "string" }
+          }
+        },
+        "signatureUrl": { "type": "string" },
+        "status": { "type": "string", "enum": ["New", "Reviewed", "Approved", "Rejected"] },
+        "submittedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["formNo", "personal", "contact", "status", "submittedAt"]
+    },
+    "PageSettings": {
+      "title": "CMS Settings",
+      "description": "Content for the public home page",
+      "type": "object",
+      "properties": {
+        "heroTitle": { "type": "string" },
+        "heroSubtitle": { "type": "string" },
+        "aboutText": { "type": "string" },
+        "contactPhone": { "type": "string" },
+        "contactAddress": { "type": "string" }
+      }
+    },
+    "FormField": {
+      "title": "Dynamic Form Field",
+      "description": "A field in the membership form",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "label": { "type": "string" },
+        "type": { "type": "string", "enum": ["text", "number", "date", "dropdown", "radio", "checkbox", "textarea", "file"] },
+        "section": { "type": "string" },
+        "required": { "type": "boolean" },
+        "order": { "type": "number" },
+        "options": { "type": "array", "items": { "type": "string" } },
+        "isHidden": { "type": "boolean" }
+      }
+    }
+  },
+  "firestore": {
+    "/submissions/{id}": {
+      "schema": "Submission",
+      "description": "Collection of all member applications"
+    },
+    "/settings/home": {
+      "schema": "PageSettings",
+      "description": "Singleton for home page content"
+    },
+    "/formFields/{id}": {
+      "schema": "FormField",
+      "description": "Dynamic form field configurations"
+    }
+  }
+}

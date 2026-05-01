@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="NCP logo watermark">
+  <circle cx="256" cy="256" r="244" fill="#006a4e" stroke="#ffffff" stroke-width="14"/>
+  <path d="M18 310h476v92H18z" fill="#dc2626"/>
+  <path d="M18 310h476" stroke="#ffffff" stroke-width="12"/>
+  <path d="M18 402h476" stroke="#ffffff" stroke-width="12"/>
+  <g fill="none" stroke="#ffffff" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M256 235c-25-50-16-96 0-129 16 33 25 79 0 129z"/>
+    <path d="M248 237c-52-13-83-48-99-81 37 4 79 22 99 81z"/>
+    <path d="M264 237c52-13 83-48 99-81-37 4-79 22-99 81z"/>
+    <path d="M244 254c-50 8-88-11-116-36 39-10 82-4 116 36z"/>
+    <path d="M268 254c50 8 88-11 116-36-39-10-82-4-116 36z"/>
+    <path d="M164 286c32-12 52-12 82 0s52 12 84 0"/>
+  </g>
+  <text x="256" y="80" text-anchor="middle" fill="#ffffff" font-family="Noto Serif Bengali, Hind Siliguri, sans-serif" font-size="37" font-weight="700">জাতীয় নাগরিক পার্টি</text>
+  <text x="256" y="370" text-anchor="middle" fill="#ffffff" font-family="Noto Serif Bengali, Hind Siliguri, sans-serif" font-size="56" font-weight="800">এনসিপি</text>
+</svg>
